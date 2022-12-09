@@ -1,8 +1,9 @@
 
-// var namepseudo=$("#n").value;
+var namepseudo=$("#n").val();
 var rightNumber = Math.floor(Math.random() * 20) + 1;
 var score = 20;
 var highscore = 0;
+
 function Makeplayerscore(namepseudo,score){
   var player ={}
   player.namepseudo=namepseudo
@@ -23,16 +24,17 @@ var displayMessage = function (message) {
 document.querySelector('.check').addEventListener('click', function () {
   var guess = Number(document.querySelector('#guess').value);
   console.log(guess, typeof guess,rightNumber);
-  // var namepseudo=document.getElementById("#n").value;
+  var namepseudo=$("#n").val();
   if (!guess) {
     alert(' please write a number!');
     
   }
+  // else if(!namepseudo){console.log('please enter your name')}
   
    else if (guess === rightNumber) {
     var player1 =Makeplayerscore(namepseudo,score);
-    localStorage.setItem('data',JSON.stringify(player1));display(player1)
-  console.log(player1)
+    localStorage.setItem('data',JSON.stringify(player1));display(player1);var storage=JSON.parse(localStorage.getItem('data'));
+  console.log(storage)
     displayMessage('Correct guess!');
    
   //  display(player1);
@@ -46,12 +48,12 @@ document.querySelector('.check').addEventListener('click', function () {
   } else if (guess !== rightNumber) {
     if (score > 1) {
 
-      if(guess > rightNumber ) {displayMessage('Too high!')} displayMessage( 'Too low!');
+      if(guess > rightNumber ) {displayMessage('Too high!')}else{ displayMessage( 'Too low!')};
       score--;
       document.querySelector('.score').textContent = score;
     } else {
      
-      displayMessage(' soory!you lost ');
+      displayMessage(' sorry!you lost ');
       document.querySelector('.score').textContent = 0;
     }
   }
